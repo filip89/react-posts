@@ -1,15 +1,13 @@
 import { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
-import { useGreeting } from '../hooks/useGreeting';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
+import { withGreeting } from './withGreeting';
 
 interface PageProps extends GreetingComponentProps {
     children: React.ReactNode;
 }
 
-const Page: FunctionComponent<PageProps> = ({ children, greet }) => {
-    useGreeting('Page', greet);
-
+let Page: FunctionComponent<PageProps> = ({ children }) => {
     return (
         <>
             <header>
@@ -21,5 +19,7 @@ const Page: FunctionComponent<PageProps> = ({ children, greet }) => {
         </>
     );
 };
+
+Page = withGreeting(Page);
 
 export default Page;

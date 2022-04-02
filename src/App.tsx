@@ -1,14 +1,12 @@
 import { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { useGreeting } from './hooks/useGreeting';
+import { withGreeting } from './components/withGreeting';
 import { GreetingComponentProps } from './models/GreetingComponentProps';
 import NotFoundPage from './pages/NotFoundPage';
 import PostPage from './pages/PostPage';
 import PostsPage from './pages/PostsPage';
 
-const App: FC<GreetingComponentProps> = ({ greet }) => {
-    useGreeting('App', greet);
-
+let App: FC<GreetingComponentProps> = ({ greet }) => {
     return (
         <>
             <Routes>
@@ -20,5 +18,7 @@ const App: FC<GreetingComponentProps> = ({ greet }) => {
         </>
     );
 };
+
+App = withGreeting(App);
 
 export default App;

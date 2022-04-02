@@ -1,16 +1,14 @@
 import { FC } from 'react';
-import { useGreeting } from '../hooks/useGreeting';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
 import { Post as PostModel } from '../models/Post';
 import Comment from './Comment';
+import { withGreeting } from './withGreeting';
 
 interface PostProps extends GreetingComponentProps {
     post: PostModel;
 }
 
-const Post: FC<PostProps> = ({ post, greet }) => {
-    useGreeting('Post', greet);
-
+let Post: FC<PostProps> = ({ post, greet }) => {
     return (
         <div>
             <article>
@@ -24,5 +22,7 @@ const Post: FC<PostProps> = ({ post, greet }) => {
         </div>
     );
 };
+
+Post = withGreeting(Post);
 
 export default Post;

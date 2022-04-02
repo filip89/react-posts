@@ -1,11 +1,10 @@
 import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import Page from '../components/Page';
-import { useGreeting } from '../hooks/useGreeting';
+import { withGreeting } from '../components/withGreeting';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
 
-const PostPage: FC<GreetingComponentProps> = ({ greet }) => {
-    useGreeting('PostPage', greet);
+let PostPage: FC<GreetingComponentProps> = ({ greet }) => {
     const params = useParams<{ id: string }>();
 
     return (
@@ -14,5 +13,7 @@ const PostPage: FC<GreetingComponentProps> = ({ greet }) => {
         </Page>
     );
 };
+
+PostPage = withGreeting(PostPage);
 
 export default PostPage;

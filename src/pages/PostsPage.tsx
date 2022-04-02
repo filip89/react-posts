@@ -2,13 +2,12 @@ import { FC, useEffect, useState } from 'react';
 import { urls } from '../api/urls';
 import Page from '../components/Page';
 import Post from '../components/Post';
-import { useGreeting } from '../hooks/useGreeting';
+import { withGreeting } from '../components/withGreeting';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
 import { Post as PostModel } from '../models/Post';
 import { mapPostsRelations } from '../utilities/mapPostsRelations';
 
-const PostsPage: FC<GreetingComponentProps> = ({ greet }) => {
-    useGreeting('PostsPage', greet);
+let PostsPage: FC<GreetingComponentProps> = ({ greet }) => {
     const [posts, setPosts] = useState<PostModel[]>([]);
 
     useEffect(() => {
@@ -29,5 +28,7 @@ const PostsPage: FC<GreetingComponentProps> = ({ greet }) => {
         </Page>
     );
 };
+
+PostsPage = withGreeting(PostsPage);
 
 export default PostsPage;
