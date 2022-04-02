@@ -1,11 +1,15 @@
 import { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
+import { useGreeting } from '../hooks/useGreeting';
+import { GreetingComponentProps } from '../models/GreetingComponentProps';
 
-interface PageProps {
+interface PageProps extends GreetingComponentProps {
     children: React.ReactNode;
 }
 
-const Page: FunctionComponent<PageProps> = ({ children }) => {
+const Page: FunctionComponent<PageProps> = ({ children, greet }) => {
+    useGreeting('Page', greet);
+
     return (
         <>
             <header>

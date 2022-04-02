@@ -1,9 +1,13 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import Page from '../components/Page';
+import { useGreeting } from '../hooks/useGreeting';
+import { GreetingComponentProps } from '../models/GreetingComponentProps';
 
-const PostsPage: FunctionComponent = () => {
+const PostsPage: FC<GreetingComponentProps> = ({ greet }) => {
+    useGreeting('PostsPage', greet);
+
     return (
-        <Page>
+        <Page greet={greet}>
             <h2>Posts</h2>
         </Page>
     );
