@@ -1,7 +1,7 @@
-import { Address } from '../models/Address';
-import { Company } from '../models/Company';
-import { Post } from '../models/Post';
-import { User } from '../models/User';
+import { Address } from '../models/resources/Address';
+import { Company } from '../models/resources/Company';
+import { Post } from '../models/resources/Post';
+import { User } from '../models/resources/User';
 
 export function filterPostsByUserData(posts: Post[], searchValue: string): Post[] {
     const relevantUsersIds = posts.reduce<User['id'][]>((usersIds, post) => {
@@ -35,5 +35,5 @@ function userMatches(user: User, searchValue: string): boolean {
     return matchInAddress;
 }
 
-// https://stackoverflow.com/a/51419293
+// credit https://stackoverflow.com/a/51419293
 type KeyOfType<T, U> = { [P in keyof T]: T[P] extends U ? P : never }[keyof T];

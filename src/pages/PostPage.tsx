@@ -1,23 +1,23 @@
 import { FC } from 'react';
 import { getPost } from '../api/requests';
 import Page from '../components/Page';
-import Post from '../components/Post';
-import { withGreeting } from '../components/withGreeting';
+import PostAndComments from '../components/PostAndComments';
+import { withGreeting } from '../hoc/withGreeting';
 import { useIntParam } from '../hooks/useIntParam';
 import { useResourceRequest } from '../hooks/useResourceRequest';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
-import NotFoundPage from './NotFoundPage';
+import ErrorPage from './ErrorPage';
 
 let PostPage: FC<GreetingComponentProps> = ({ greet }) => {
     const postId = useIntParam('id');
     const request = postId ? getPost(postId) : Promise.reject();
     const [post, error] = useResourceRequest(request);
 
-    if (error) return <NotFoundPage greet={greet}></NotFoundPage>;
+    if (error) return <ErrorPage greet={greet}></ErrorPage>;
     return (
         <Page greet={greet}>
             <h2>Post</h2>
-            {post ? <Post post={post} greet={greet}></Post> : 'Loading'}
+            {post ? <PostAndComments post={post} greet={greet}></PostAndComments> : 'Loading'}
         </Page>
     );
 };

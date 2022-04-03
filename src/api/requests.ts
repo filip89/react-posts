@@ -1,6 +1,6 @@
-import { Comment } from '../models/Comment';
-import { Post } from '../models/Post';
-import { User } from '../models/User';
+import { Comment } from '../models/resources/Comment';
+import { Post } from '../models/resources/Post';
+import { User } from '../models/resources/User';
 import { batchGETRequests } from './batchRequests';
 import { urls } from './urls';
 

@@ -11,7 +11,7 @@ export function useResourceRequest<Resource>(
         request
             .finally(() => setFetching(false))
             .then((resource) => resource && setResource(resource))
-            .catch(() => setError("Request error!")); //TODO
+            .catch(() => setError("Request error!"));
     }, []);
 
     return [resource, error, fetching];

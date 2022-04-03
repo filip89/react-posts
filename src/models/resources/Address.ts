@@ -6,5 +6,5 @@ export interface Address {
     geo: {
         lat: string;
         lng: string;
-    }
+    };
 }

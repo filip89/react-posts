@@ -1,8 +1,9 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
-import { Post as PostModel } from '../models/Post';
-import Comment from './Comment';
-import { withGreeting } from './withGreeting';
+import { Post as PostModel } from '../models/resources/Post';
+import { withGreeting } from '../hoc/withGreeting';
+import UserArticle from './UserArticle';
 
 interface PostProps extends GreetingComponentProps {
     post: PostModel;
@@ -10,16 +11,18 @@ interface PostProps extends GreetingComponentProps {
 
 let Post: FC<PostProps> = ({ post, greet }) => {
     return (
-        <div>
-            <article>
-                <div>{post.user?.name}</div>
-                <header>{post.title}</header>
-                <p>{post.body}</p>
-            </article>
-            {post.comments.map((comment) => (
-                <Comment key={comment.id} comment={comment} greet={greet}></Comment>
-            ))}
-        </div>
+        <UserArticle
+            headerContent={
+                <div>
+                    <div>{post.user?.name || 'Unknown'}</div>
+                    <Link to={'/post/' + post.id}>
+                        <h3>{post.title}</h3>
+                    </Link>
+                </div>
+            }
+            greet={greet}
+            text={post.body}
+        ></UserArticle>
     );
 };
 
