@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { withGreeting } from '../hoc/withGreeting';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
+import './UserArticle.scss';
 
 interface UserArticleProps extends GreetingComponentProps {
     headerContent: React.ReactNode;
@@ -9,10 +10,8 @@ interface UserArticleProps extends GreetingComponentProps {
 
 let UserArticle: FC<UserArticleProps> = ({ headerContent, text }) => {
     return (
-        <article>
-            <header>
-                {headerContent}
-            </header>
+        <article className="user-article">
+            <header className="user-article__header">{headerContent}</header>
             <p>{text}</p>
         </article>
     );

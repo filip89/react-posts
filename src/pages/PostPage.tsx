@@ -13,10 +13,9 @@ let PostPage: FC<GreetingComponentProps> = ({ greet }) => {
     const request = postId ? getPost(postId) : Promise.reject();
     const [post, error] = useResourceRequest(request);
 
-    if (error) return <ErrorPage greet={greet}></ErrorPage>;
+    if (error) return <ErrorPage greet={greet}>Resource not found</ErrorPage>;
     return (
-        <Page greet={greet}>
-            <h2>Post</h2>
+        <Page greet={greet} title="Post">
             {post ? <PostAndComments post={post} greet={greet}></PostAndComments> : 'Loading'}
         </Page>
     );

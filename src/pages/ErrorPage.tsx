@@ -4,14 +4,13 @@ import { withGreeting } from '../hoc/withGreeting';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
 
 interface ErrorPage extends GreetingComponentProps {
-    message?: string;
+    children?: React.ReactNode;
 }
 
-let ErrorPage: FC<ErrorPage> = ({ message, greet }) => {
+let ErrorPage: FC<ErrorPage> = ({ children, greet }) => {
     return (
-        <Page greet={greet}>
-            <h2>Error</h2>
-            <div>{message}</div>
+        <Page greet={greet} title="Error">
+            {children}
         </Page>
     );
 };

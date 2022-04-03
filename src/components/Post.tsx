@@ -4,6 +4,7 @@ import { GreetingComponentProps } from '../models/GreetingComponentProps';
 import { Post as PostModel } from '../models/resources/Post';
 import { withGreeting } from '../hoc/withGreeting';
 import UserArticle from './UserArticle';
+import './Post.scss';
 
 interface PostProps extends GreetingComponentProps {
     post: PostModel;
@@ -13,11 +14,13 @@ let Post: FC<PostProps> = ({ post, greet }) => {
     return (
         <UserArticle
             headerContent={
-                <div>
-                    <div>{post.user?.name || 'Unknown'}</div>
-                    <Link to={'/post/' + post.id}>
-                        <h3>{post.title}</h3>
-                    </Link>
+                <div className="post-header">
+                    <div className="post-header__author">{post.user?.name || 'Unknown'}</div>
+                    <h3>
+                        <Link className="post-header__link" to={'/post/' + post.id}>
+                            {post.title}
+                        </Link>
+                    </h3>
                 </div>
             }
             greet={greet}

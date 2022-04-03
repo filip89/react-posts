@@ -8,6 +8,7 @@ import { useResourceRequest } from '../hooks/useResourceRequest';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
 import { filterPostsByUserData } from '../utils/filterPostsByUserData';
 import ErrorPage from './ErrorPage';
+import './PostsPage.scss';
 
 let PostsPage: FC<GreetingComponentProps> = ({ greet }) => {
     const [posts, error] = useResourceRequest(getPosts);
@@ -23,20 +24,24 @@ let PostsPage: FC<GreetingComponentProps> = ({ greet }) => {
 
     if (error) return <ErrorPage greet={greet}></ErrorPage>;
     return (
-        <Page greet={greet}>
-            <section>
-                <h2>Posts</h2>
-                <div>
-                    <input value={searchFilter} onChange={handleSearchChange} placeholder="Search by user data"></input>
+        <Page greet={greet} title="Posts">
+            <div className="posts-page">
+                <div className="posts-page__search-wrapper">
+                    <input
+                        className="search-input"
+                        value={searchFilter}
+                        onChange={handleSearchChange}
+                        placeholder="Search by user data"
+                    ></input>
                 </div>
-                {filteredPosts ? (
-                    filteredPosts.map((post) => (
-                        <PostAndComments key={post.id} post={post} greet={greet}></PostAndComments>
-                    ))
-                ) : (
-                    <div>Loading</div>
-                )}
-            </section>
+                {filteredPosts
+                    ? filteredPosts.map((post) => (
+                          <div className="posts-page__post-comments" key={post.id}>
+                              <PostAndComments post={post} greet={greet}></PostAndComments>
+                          </div>
+                      ))
+                    : 'Loading'}
+            </div>
         </Page>
     );
 };

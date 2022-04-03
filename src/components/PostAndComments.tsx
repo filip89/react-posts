@@ -4,6 +4,7 @@ import { GreetingComponentProps } from '../models/GreetingComponentProps';
 import { Post as PostModel } from '../models/resources/Post';
 import Comment from './Comment';
 import Post from './Post';
+import './PostAndComments.scss';
 
 interface PostAndCommentsProps extends GreetingComponentProps {
     post: PostModel;
@@ -11,11 +12,15 @@ interface PostAndCommentsProps extends GreetingComponentProps {
 
 let PostAndComments: FC<PostAndCommentsProps> = ({ post, greet }) => {
     return (
-        <div>
-            <Post post={post} greet={greet}></Post>
+        <div className="post-comments">
+            <div className="post-comments__item">
+                <Post post={post} greet={greet}></Post>
+            </div>
             <div>
                 {post.comments.map((comment) => (
-                    <Comment key={comment.id} comment={comment} greet={greet}></Comment>
+                    <div className="post-comments__item post-comments__comment" key={comment.id}>
+                        <Comment comment={comment} greet={greet}></Comment>
+                    </div>
                 ))}
             </div>
         </div>

@@ -1,0 +1,12 @@
+@import '../style/globals';
+
+.post-header{
+    &__author {
+        font-style: italic;
+    }
+    &__link {
+        &:hover {
+            color: rgba($color: $color-primary, $alpha: 0.5)
+        }
+    }
+}

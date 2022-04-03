@@ -13,7 +13,7 @@ let App: FC<GreetingComponentProps> = ({ greet }) => {
                 <Route path="/" element={<Navigate to="/posts" replace></Navigate>} />
                 <Route path="posts" element={<PostsPage greet={greet}></PostsPage>} />
                 <Route path="post/:id" element={<PostPage greet={greet}></PostPage>} />
-                <Route path="*" element={<ErrorPage greet={greet} message="No such route"></ErrorPage>} />
+                <Route path="*" element={<ErrorPage greet={greet}>No such route</ErrorPage>} />
             </Routes>
         </>
     );

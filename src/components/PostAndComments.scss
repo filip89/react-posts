@@ -1,0 +1,9 @@
+.post-comments {   
+    &__item {
+        margin-bottom: 0.25rem;
+    }
+    &__comment {
+        width: 95%;
+        margin-left: auto;
+    }
+}
