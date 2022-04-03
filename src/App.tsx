@@ -6,14 +6,14 @@ import ErrorPage from './pages/ErrorPage';
 import PostPage from './pages/PostPage';
 import PostsPage from './pages/PostsPage';
 
-let App: FC<GreetingComponentProps> = ({ greet }) => {
+let App: FC<GreetingComponentProps> = ({ greetIngPrefix }) => {
     return (
         <>
             <Routes>
                 <Route path="/" element={<Navigate to="/posts" replace></Navigate>} />
-                <Route path="posts" element={<PostsPage greet={greet}></PostsPage>} />
-                <Route path="post/:id" element={<PostPage greet={greet}></PostPage>} />
-                <Route path="*" element={<ErrorPage greet={greet}>No such route</ErrorPage>} />
+                <Route path="posts" element={<PostsPage greetIngPrefix={greetIngPrefix}></PostsPage>} />
+                <Route path="post/:id" element={<PostPage greetIngPrefix={greetIngPrefix}></PostPage>} />
+                <Route path="*" element={<ErrorPage greetIngPrefix={greetIngPrefix}>No such route</ErrorPage>} />
             </Routes>
         </>
     );

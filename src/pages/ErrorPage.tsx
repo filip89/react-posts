@@ -7,9 +7,9 @@ interface ErrorPage extends GreetingComponentProps {
     children?: React.ReactNode;
 }
 
-let ErrorPage: FC<ErrorPage> = ({ children, greet }) => {
+let ErrorPage: FC<ErrorPage> = ({ children, greetIngPrefix }) => {
     return (
-        <Page greet={greet} title="Error">
+        <Page greetIngPrefix={greetIngPrefix} title="Error">
             {children}
         </Page>
     );

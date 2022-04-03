@@ -10,9 +10,9 @@ interface PostProps extends GreetingComponentProps {
     post: PostModel;
 }
 
-let Post: FC<PostProps> = ({ post, greet }) => {
+let Post: FC<PostProps> = ({ post, greetIngPrefix }) => {
     return (
-        <Card greet={greet}>
+        <Card greetIngPrefix={greetIngPrefix}>
             <header className="post-header">
                 <div className="post-header__author">{post.user?.name || 'Unknown'}</div>
                 <h3>

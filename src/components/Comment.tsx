@@ -8,9 +8,9 @@ interface CommentProps extends GreetingComponentProps {
     comment: CommentModel;
 }
 
-let Comment: FC<CommentProps> = ({ comment, greet }) => {
+let Comment: FC<CommentProps> = ({ comment, greetIngPrefix }) => {
     return (
-        <Card greet={greet}>
+        <Card greetIngPrefix={greetIngPrefix}>
             <p>{comment.body}</p>
         </Card>
     );

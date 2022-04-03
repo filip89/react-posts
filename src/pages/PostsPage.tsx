@@ -10,7 +10,7 @@ import { filterPostsByUserData } from '../utils/filterPostsByUserData';
 import ErrorPage from './ErrorPage';
 import './PostsPage.scss';
 
-let PostsPage: FC<GreetingComponentProps> = ({ greet }) => {
+let PostsPage: FC<GreetingComponentProps> = ({ greetIngPrefix }) => {
     const [posts, error] = useResourceRequest(getPosts);
     const [searchFilter, setSearchFilter] = useState('');
     const filteredPosts = useMemo(() => {
@@ -22,9 +22,9 @@ let PostsPage: FC<GreetingComponentProps> = ({ greet }) => {
         setSearchFilter(event.target.value);
     }
 
-    if (error) return <ErrorPage greet={greet}></ErrorPage>;
+    if (error) return <ErrorPage greetIngPrefix={greetIngPrefix}></ErrorPage>;
     return (
-        <Page greet={greet} title="Posts">
+        <Page greetIngPrefix={greetIngPrefix} title="Posts">
             <div className="posts-page">
                 <div className="posts-page__search-wrapper">
                     <input
@@ -37,7 +37,7 @@ let PostsPage: FC<GreetingComponentProps> = ({ greet }) => {
                 {filteredPosts
                     ? filteredPosts.map((post) => (
                           <div className="posts-page__post-comments" key={post.id}>
-                              <PostAndComments post={post} greet={greet}></PostAndComments>
+                              <PostAndComments post={post} greetIngPrefix={greetIngPrefix}></PostAndComments>
                           </div>
                       ))
                     : 'Loading'}

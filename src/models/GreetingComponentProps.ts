@@ -1,7 +1,5 @@
-import { Greeter } from '../utils/greet';
-
 interface GreetingComponentProps {
-    greet: Greeter;
+    greetIngPrefix: string;
 }
 
 export type { GreetingComponentProps };

@@ -10,16 +10,16 @@ interface PostAndCommentsProps extends GreetingComponentProps {
     post: PostModel;
 }
 
-let PostAndComments: FC<PostAndCommentsProps> = ({ post, greet }) => {
+let PostAndComments: FC<PostAndCommentsProps> = ({ post, greetIngPrefix }) => {
     return (
         <div className="post-comments">
             <div className="post-comments__item">
-                <Post post={post} greet={greet}></Post>
+                <Post post={post} greetIngPrefix={greetIngPrefix}></Post>
             </div>
             <div>
                 {post.comments.map((comment) => (
                     <div className="post-comments__item post-comments__comment" key={comment.id}>
-                        <Comment comment={comment} greet={greet}></Comment>
+                        <Comment comment={comment} greetIngPrefix={greetIngPrefix}></Comment>
                     </div>
                 ))}
             </div>
