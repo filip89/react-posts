@@ -7,7 +7,7 @@ function getGreeting(componentName: string): string {
 }
 
 const consoleGreet: Greeter = (componentName) => {
-    console.log(getGreeting(componentName));
+    // console.log(getGreeting(componentName));
 };
 
 // other example
