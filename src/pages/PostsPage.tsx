@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { ChangeEvent, FC } from 'react';
 import { getPosts } from '../api/requests';
+import Loading from '../components/Loading';
 import Page from '../components/Page';
 import PostAndComments from '../components/PostAndComments';
 import { withGreeting } from '../hoc/withGreeting';
@@ -34,13 +35,15 @@ let PostsPage: FC<GreetingComponentProps> = ({ greetIngPrefix }) => {
                         placeholder="Search by user data"
                     ></input>
                 </div>
-                {filteredPosts
-                    ? filteredPosts.map((post) => (
-                          <div className="posts-page__post-comments" key={post.id}>
-                              <PostAndComments post={post} greetIngPrefix={greetIngPrefix}></PostAndComments>
-                          </div>
-                      ))
-                    : 'Loading'}
+                {filteredPosts ? (
+                    filteredPosts.map((post) => (
+                        <div className="posts-page__post-comments" key={post.id}>
+                            <PostAndComments post={post} greetIngPrefix={greetIngPrefix}></PostAndComments>
+                        </div>
+                    ))
+                ) : (
+                    <Loading greetIngPrefix={greetIngPrefix}></Loading>
+                )}
             </div>
         </Page>
     );

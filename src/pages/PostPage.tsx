@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { getPost } from '../api/requests';
+import Loading from '../components/Loading';
 import Page from '../components/Page';
 import PostAndComments from '../components/PostAndComments';
 import { withGreeting } from '../hoc/withGreeting';
@@ -16,7 +17,7 @@ let PostPage: FC<GreetingComponentProps> = ({ greetIngPrefix }) => {
     if (error) return <ErrorPage greetIngPrefix={greetIngPrefix}>Resource not found</ErrorPage>;
     return (
         <Page greetIngPrefix={greetIngPrefix} title="Post">
-            {post ? <PostAndComments post={post} greetIngPrefix={greetIngPrefix}></PostAndComments> : 'Loading'}
+            {post ? <PostAndComments post={post} greetIngPrefix={greetIngPrefix}></PostAndComments> : <Loading greetIngPrefix={greetIngPrefix}></Loading>}
         </Page>
     );
 };
