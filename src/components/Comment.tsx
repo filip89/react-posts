@@ -2,14 +2,18 @@ import { FC } from 'react';
 import { Comment as CommentModel } from '../models/resources/Comment';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
 import { withGreeting } from '../hoc/withGreeting';
-import UserArticle from './UserArticle';
+import Card from './Card';
 
 interface CommentProps extends GreetingComponentProps {
     comment: CommentModel;
 }
 
 let Comment: FC<CommentProps> = ({ comment, greet }) => {
-    return <UserArticle headerContent={<h4>{comment.name}</h4>} greet={greet} text={comment.body}></UserArticle>;
+    return (
+        <Card greet={greet}>
+            <p>{comment.body}</p>
+        </Card>
+    );
 };
 
 Comment = withGreeting(Comment);
