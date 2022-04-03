@@ -1,27 +1,23 @@
-import { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { postRequest } from '../api/getPost';
+import { FC } from 'react';
+import { getPost } from '../api/requests';
 import Page from '../components/Page';
 import Post from '../components/Post';
 import { withGreeting } from '../components/withGreeting';
+import { useIntParam } from '../hooks/useIntParam';
+import { useResourceRequest } from '../hooks/useResourceRequest';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
-import { Post as PostModel } from '../models/Post';
+import NotFoundPage from './NotFoundPage';
 
 let PostPage: FC<GreetingComponentProps> = ({ greet }) => {
-    const params = useParams<{ id: string }>();
-    const postIdParam = params?.id?.match(/\d+/)?.input;
-    const postId = postIdParam && parseInt(postIdParam);
-    const [post, setPost] = useState<PostModel>();
+    const postId = useIntParam('id');
+    const request = postId ? getPost(postId) : Promise.reject();
+    const [post, error] = useResourceRequest(request);
 
-    useEffect(() => {
-        if (!postId) return;
-        postRequest(postId).then((post) => setPost(post));
-    }, []);
-
+    if (error) return <NotFoundPage greet={greet}></NotFoundPage>;
     return (
         <Page greet={greet}>
             <h2>Post</h2>
-            {post && <Post post={post} greet={greet}></Post>}
+            {post ? <Post post={post} greet={greet}></Post> : 'Loading'}
         </Page>
     );
 };

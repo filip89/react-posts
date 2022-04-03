@@ -1,4 +1,4 @@
-import { Greeter } from '../utilities/greet';
+import { Greeter } from '../utils/greet';
 
 interface GreetingComponentProps {
     greet: Greeter;

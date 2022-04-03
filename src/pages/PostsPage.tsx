@@ -1,24 +1,20 @@
-import { FC, useEffect, useState } from 'react';
-import { postsRequest } from '../api/getPosts';
+import { FC } from 'react';
+import { getPosts } from '../api/requests';
 import Page from '../components/Page';
 import Post from '../components/Post';
 import { withGreeting } from '../components/withGreeting';
+import { useResourceRequest } from '../hooks/useResourceRequest';
 import { GreetingComponentProps } from '../models/GreetingComponentProps';
-import { Post as PostModel } from '../models/Post';
+import NotFoundPage from './NotFoundPage';
 
 let PostsPage: FC<GreetingComponentProps> = ({ greet }) => {
-    const [posts, setPosts] = useState<PostModel[]>([]);
+    const [posts, error] = useResourceRequest(getPosts);
 
-    useEffect(() => {
-        postsRequest.then((posts) => setPosts(posts));
-    }, []);
-
+    if (error) return <NotFoundPage greet={greet}></NotFoundPage>;
     return (
         <Page greet={greet}>
             <h2>Posts</h2>
-            {posts.map((post) => (
-                <Post key={post.id} post={post} greet={greet}></Post>
-            ))}
+            {posts ? posts.map((post) => <Post key={post.id} post={post} greet={greet}></Post>) : 'Loading'}
         </Page>
     );
 };
