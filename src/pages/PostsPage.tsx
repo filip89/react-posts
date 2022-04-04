@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ChangeEvent, FC } from 'react';
+import { FC } from 'react';
 import { getPosts } from '../api/requests';
 import Loading from '../components/Loading';
 import Page from '../components/Page';
@@ -10,30 +10,24 @@ import { GreetingComponentProps } from '../models/GreetingComponentProps';
 import { filterPostsByUserData } from '../utils/filterPostsByUserData';
 import ErrorPage from './ErrorPage';
 import './PostsPage.scss';
+import SearchInput from '../components/Search';
 
 let PostsPage: FC<GreetingComponentProps> = ({ greetIngPrefix }) => {
     const [posts, error] = useResourceRequest(getPosts);
-    const [searchFilter, setSearchFilter] = useState('');
+    const [searchFilter, setSearchFilter] = useState<string>();
     const filteredPosts = useMemo(() => {
         if (!searchFilter || !posts) return posts;
         return filterPostsByUserData(posts, searchFilter);
     }, [posts, searchFilter]);
 
-    function handleSearchChange(event: ChangeEvent<HTMLInputElement>): void {
-        setSearchFilter(event.target.value);
-    }
+    const handleSearchChange = (value: string) => setSearchFilter(value);
 
     if (error) return <ErrorPage greetIngPrefix={greetIngPrefix}></ErrorPage>;
     return (
         <Page greetIngPrefix={greetIngPrefix} title="Posts">
             <div className="posts-page">
-                <div className="posts-page__search-wrapper">
-                    <input
-                        className="search-input"
-                        value={searchFilter}
-                        onChange={handleSearchChange}
-                        placeholder="Search by user data"
-                    ></input>
+                <div className="posts-page__search">
+                    <SearchInput onChange={handleSearchChange} greetIngPrefix={greetIngPrefix}></SearchInput>
                 </div>
                 {filteredPosts ? (
                     filteredPosts.map((post) => (
