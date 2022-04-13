@@ -5,7 +5,7 @@ export function withGreeting<T extends GreetingComponentProps>(Component: Compon
     const componentName = Component.name || 'Unknown';
     const func = (props: T) => {
         useEffect(() => {
-            console.log(`${props.greetIngPrefix}${componentName}`);
+            console.log(`${props.greetIngPrefix} ${componentName}`);
         }, []);
 
         return <Component {...props}></Component>;

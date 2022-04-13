@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { FC } from 'react';
-import { getPosts } from '../api/requests';
+import { getPostsRequest } from '../api/requests';
 import Loading from '../components/Loading';
 import Page from '../components/Page';
 import PostAndComments from '../components/PostAndComments';
@@ -13,7 +13,7 @@ import './PostsPage.scss';
 import SearchInput from '../components/Search';
 
 let PostsPage: FC<GreetingComponentProps> = ({ greetIngPrefix }) => {
-    const [posts, error] = useResourceRequest(getPosts);
+    const [posts, error] = useResourceRequest(getPostsRequest());
     const [searchFilter, setSearchFilter] = useState<string>();
     const filteredPosts = useMemo(() => {
         if (!searchFilter || !posts) return posts;

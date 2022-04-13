@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { getPost } from '../api/requests';
+import { getPostRequest } from '../api/requests';
 import Loading from '../components/Loading';
 import Page from '../components/Page';
 import PostAndComments from '../components/PostAndComments';
@@ -11,13 +11,17 @@ import ErrorPage from './ErrorPage';
 
 let PostPage: FC<GreetingComponentProps> = ({ greetIngPrefix }) => {
     const postId = useIntParam('id');
-    const request = postId ? getPost(postId) : Promise.reject();
+    const request = postId ? getPostRequest(postId) : () => Promise.reject();
     const [post, error] = useResourceRequest(request);
 
     if (error) return <ErrorPage greetIngPrefix={greetIngPrefix}>Resource not found</ErrorPage>;
     return (
         <Page greetIngPrefix={greetIngPrefix} title="Post">
-            {post ? <PostAndComments post={post} greetIngPrefix={greetIngPrefix}></PostAndComments> : <Loading greetIngPrefix={greetIngPrefix}></Loading>}
+            {post ? (
+                <PostAndComments post={post} greetIngPrefix={greetIngPrefix}></PostAndComments>
+            ) : (
+                <Loading greetIngPrefix={greetIngPrefix}></Loading>
+            )}
         </Page>
     );
 };
